@@ -1,5 +1,6 @@
-# **Plugin Name** Plugin
+# Discourse Needs Love Plugin
 
 **Plugin Summary**
 
-For more information, please see: **url to meta topic**
+Adds a button available to a specified group that they can press to add a tag to
+a topic to mark it as "Needs Love" so that staff can take action on it.
