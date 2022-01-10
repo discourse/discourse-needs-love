@@ -1,5 +1,16 @@
 import { withPluginApi } from "discourse/lib/plugin-api";
 import I18n from "I18n";
+import { ajax } from "discourse/lib/ajax";
+
+function TagTopic(user, target, targetType = "Topic") {
+  let tags = ["needs-love"]
+  return ajax(`/needs_love/needs_love/${target.id}`, {
+    type: "PUT",
+    data: {
+      tags: tags
+    },
+  });
+}
 
 function registerTopicFooterButtons(api) {
   api.registerTopicFooterButton({
@@ -19,7 +30,7 @@ function registerTopicFooterButtons(api) {
     },
     action() {
       // Add Tag
-      alert('hi');
+      TagTopic(this.currentUser, this.topic)
     },
     dropdown() {
       return this.site.mobileView;
@@ -43,7 +54,6 @@ export default {
 
     const currentUser = container.lookup("current-user:main");
 
-    //withPluginApi("0.11.0", (api) => initialize(api));
     withPluginApi("0.8.28", (api) => registerTopicFooterButtons(api));
   },
 };
