@@ -1,8 +1,7 @@
 import { withPluginApi } from "discourse/lib/plugin-api";
-import I18n from "I18n";
 import { ajax } from "discourse/lib/ajax";
 
-function TagTopic(user, target, targetType = "Topic") {
+function TagTopic(user, target) {
   return ajax(`/needs_love/needs_love/${target.id}`, {
     type: "PUT",
     data: {},
@@ -27,7 +26,7 @@ function registerTopicFooterButtons(api) {
     },
     action() {
       // Add Tag
-      TagTopic(this.currentUser, this.topic)
+      TagTopic(this.currentUser, this.topic);
     },
     dropdown() {
       return this.site.mobileView;
@@ -48,8 +47,6 @@ export default {
     if (!siteSettings.needs_love_enabled) {
       return;
     }
-
-    const currentUser = container.lookup("current-user:main");
 
     withPluginApi("0.8.28", (api) => registerTopicFooterButtons(api));
   },
