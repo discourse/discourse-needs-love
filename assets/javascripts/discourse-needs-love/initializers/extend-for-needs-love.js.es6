@@ -3,12 +3,9 @@ import I18n from "I18n";
 import { ajax } from "discourse/lib/ajax";
 
 function TagTopic(user, target, targetType = "Topic") {
-  let tags = ["needs-love"]
   return ajax(`/needs_love/needs_love/${target.id}`, {
     type: "PUT",
-    data: {
-      tags: tags
-    },
+    data: {},
   });
 }
 
