@@ -51,4 +51,3 @@ export default {
     withPluginApi("0.8.28", (api) => registerTopicFooterButtons(api));
   },
 };
-

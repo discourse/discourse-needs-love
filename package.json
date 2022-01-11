@@ -1,7 +1,7 @@
 {
   "name": "discourse-needs-love",
   "version": "0.0.1",
-  "repository": "TODO",
+  "repository": "git@github.com:discourse/discourse-needs-love.git",
   "author": "Discourse",
   "license": "MIT",
   "devDependencies": {
