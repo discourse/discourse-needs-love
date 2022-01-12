@@ -8,7 +8,8 @@ module DiscourseNeedsLove
     def needs_love
       tag = "needs-love" # Load from plugin site setting
       topic = Topic.find_by(id: params[:topic_id])
-      results = DiscourseTagging.tag_topic_by_names(topic, guardian, [tag])
+      tags = (topic.tags.pluck(:name) + [tag]).uniq
+      results = PostRevisor.new(topic.first_post, topic).revise!(current_user, { tags: tags }, validate_post: false)
       if results == true
         render json: success_json
       else
