@@ -2,3 +2,6 @@ plugins:
   needs_love_enabled:
     default: false
     client: true
+  needs_love_tag:
+    default: "needs-love"
+    client: true
