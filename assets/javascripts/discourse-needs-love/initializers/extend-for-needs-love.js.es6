@@ -4,9 +4,8 @@ import { popupAjaxError } from "discourse/lib/ajax-error";
 
 function tagTopic(user, target) {
   ajax(`/needs_love/needs_love/${target.id}`, {
-    type: "PUT"
-  })
-  .catch((reason) => {
+    type: "PUT",
+  }).catch((reason) => {
     popupAjaxError(reason);
   });
 }
