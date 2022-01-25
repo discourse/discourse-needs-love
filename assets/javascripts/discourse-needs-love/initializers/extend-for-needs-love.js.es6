@@ -19,14 +19,6 @@ function disableNeedsLoveButton(topic, tagName) {
   return tags.includes(tagName);
 }
 
-function getClassNames(topic) {
-  const classNames = ["needs-love"];
-  if (disableNeedsLoveButton(topic)) {
-    classNames.push("disabled");
-  }
-  return classNames;
-}
-
 function registerTopicFooterButtons(api, tagName) {
   api.registerTopicFooterButton({
     id: "needs-love",
@@ -45,8 +37,7 @@ function registerTopicFooterButtons(api, tagName) {
     },
     action() {
       // Add Tag
-      tagTopic(this.currentUser, this.topic)
-      .then(() => {
+      tagTopic(this.currentUser, this.topic).then(() => {
         this.appEvents.trigger("post-stream:refresh", {
           id: this.topic.postStream.firstPostId,
         });
