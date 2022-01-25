@@ -19,4 +19,5 @@ Discourse::Application.routes.append do
 end
 
 after_initialize do
+  require_relative "app/controllers/discourse_needs_love/needs_love_controller.rb"
 end
