@@ -4,10 +4,8 @@ require 'rails_helper'
 
 module DiscourseNeedsLove
   describe NeedsLoveController do
-    let(:topic) { Fabricate(:topic) }
-    let(:post) { Fabricate(:post, topic: topic) }
-    before_all do
-    end
+    fab!(:topic) { Fabricate(:topic) }
+    fab!(:post) { Fabricate(:post, topic: topic) }
 
     context "signed in as an admin" do
       fab!(:signed_in_user) { Fabricate(:admin) }

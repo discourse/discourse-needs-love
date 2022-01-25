@@ -3,15 +3,12 @@ import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 
 function tagTopic(user, target) {
-  try {
-    let result = ajax(`/needs_love/needs_love/${target.id}`, {
-      type: "PUT",
-      data: {},
-    });
-    return result;
-  } catch (error) {
-    popupAjaxError(error);
-  }
+  ajax(`/needs_love/needs_love/${target.id}`, {
+    type: "PUT"
+  })
+  .catch((reason) => {
+    popupAjaxError(reason);
+  });
 }
 
 function disableNeedsLoveButton(topic, tagName) {
@@ -36,12 +33,7 @@ function registerTopicFooterButtons(api, tagName) {
       return "Needs Love";
     },
     action() {
-      // Add Tag
-      tagTopic(this.currentUser, this.topic).then(() => {
-        this.appEvents.trigger("post-stream:refresh", {
-          id: this.topic.postStream.firstPostId,
-        });
-      });
+      tagTopic(this.currentUser, this.topic);
     },
     dropdown() {
       return this.site.mobileView;
