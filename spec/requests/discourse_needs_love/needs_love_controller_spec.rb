@@ -5,23 +5,49 @@ require 'rails_helper'
 module DiscourseNeedsLove
   describe NeedsLoveController do
     fab!(:topic) { Fabricate(:topic) }
-    fab!(:post) { Fabricate(:post, topic: topic) }
+    fab!(:group) { Fabricate(:group) }
+    fab!(:post)  { Fabricate(:post, topic: topic) }
 
     context "signed in as an admin" do
-      fab!(:signed_in_user) { Fabricate(:admin) }
-      fab!(:another_admin) { Fabricate(:admin) }
+      fab!(:signed_in_admin) { Fabricate(:admin) }
 
       before do
         SiteSetting.needs_love_enabled = true
         SiteSetting.tagging_enabled = true
+        SiteSetting.needs_love_allowed_groups = "#{group.id}"
 
-        sign_in signed_in_user
+        sign_in signed_in_admin
       end
 
       it 'adds the needs-love tag' do
         put "/needs_love/needs_love/#{post.topic.id}.json"
         expect(response.status).to eq(200)
         expect(topic.tags.pluck(:name).include?("needs-love")).to eq(true)
+      end
+    end
+
+    context "signed in as a user" do
+      fab!(:signed_in_user) { Fabricate(:user) }
+
+      before do
+        SiteSetting.needs_love_enabled = true
+        SiteSetting.tagging_enabled = true
+        SiteSetting.needs_love_allowed_groups = "#{group.id}"
+
+        sign_in signed_in_user
+      end
+
+      it 'raises invalid access if not in correct group' do
+        put "/needs_love/needs_love/#{post.topic.id}.json"
+
+        expect(response.status).to eq(403)
+      end
+
+      it 'allows the user when part of the specified group' do
+        group.add(signed_in_user)
+        put "/needs_love/needs_love/#{post.topic.id}.json"
+
+        expect(response.status).to eq(200)
       end
     end
   end

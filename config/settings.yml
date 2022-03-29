@@ -5,3 +5,7 @@ plugins:
   needs_love_tag:
     default: "needs-love"
     client: true
+  needs_love_allowed_groups:
+    default: ""
+    type: group_list
+    list_type: compact

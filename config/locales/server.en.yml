@@ -2,3 +2,4 @@ en:
   site_settings:
     needs_love_enabled: "Enable the Needs Love plugin"
     needs_love_tag: "Tag name for the Needs Love plugin"
+    needs_love_allowed_groups: "Groups allowed to use the Needs Love button"
