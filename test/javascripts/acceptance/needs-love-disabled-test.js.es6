@@ -7,20 +7,22 @@ import { visit } from "@ember/test-helpers";
 import { clearTopicFooterButtons } from "discourse/lib/register-topic-footer-button";
 import { test } from "qunit";
 
-acceptance("Discourse Needs Love | Needs Love disabled mobile", function (needs) {
-  needs.user();
-  needs.mobileView();
-  needs.settings({ needs_love_enabled: false });
-  needs.hooks.beforeEach(() => clearTopicFooterButtons());
+acceptance(
+  "Discourse Needs Love | Needs Love disabled mobile",
+  function (needs) {
+    needs.user();
+    needs.mobileView();
+    needs.settings({ needs_love_enabled: false });
+    needs.hooks.beforeEach(() => clearTopicFooterButtons());
 
-  test("Footer dropdown does not contain button", async (assert) => {
-    updateCurrentUser({ can_needs_love: true });
-    const menu = selectKit(".topic-footer-mobile-dropdown");
+    test("Footer dropdown does not contain button", async (assert) => {
+      updateCurrentUser({ can_needs_love: true });
+      const menu = selectKit(".topic-footer-mobile-dropdown");
 
-    await visit("/t/internationalization-localization/280");
-    await menu.expand();
+      await visit("/t/internationalization-localization/280");
+      await menu.expand();
 
-    assert.notOk(menu.rowByValue("needs-love").exists());
-  });
-});
-
+      assert.notOk(menu.rowByValue("needs-love").exists());
+    });
+  }
+);
