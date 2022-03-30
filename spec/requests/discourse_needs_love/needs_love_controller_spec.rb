@@ -37,7 +37,7 @@ module DiscourseNeedsLove
         sign_in signed_in_user
       end
 
-      it 'raises invalid access if not in correct group' do
+      it 'raises invalid access if user is not in allowed group' do
         put "/needs_love/needs_love/#{post.topic.id}.json"
 
         expect(response.status).to eq(403)
