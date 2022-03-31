@@ -4,6 +4,7 @@ module DiscourseNeedsLove
   class NeedsLoveController < ApplicationController
     requires_login
     before_action :ensure_logged_in
+    before_action :ensure_can_needs_love
 
     def needs_love
       tag_name = SiteSetting.needs_love_tag
@@ -21,6 +22,12 @@ module DiscourseNeedsLove
       PostRevisor.new(topic.first_post, topic).revise!(current_user, { tags: tag_names }, validate_post: false)
 
       render json: success_json
+    end
+
+    private
+
+    def ensure_can_needs_love
+      raise Discourse::InvalidAccess.new unless current_user && current_user.can_needs_love?
     end
   end
 end

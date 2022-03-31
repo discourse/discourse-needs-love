@@ -40,7 +40,10 @@ function registerTopicFooterButtons(api, tagName) {
     classNames: ["needs-love"],
     dependentKeys: ["topic.tags"],
     displayed() {
-      return !disableNeedsLoveButton(this.topic, tagName);
+      return (
+        this.get("currentUser.can_needs_love") &&
+        !disableNeedsLoveButton(this.topic, tagName)
+      );
     },
   });
 
@@ -68,7 +71,10 @@ function registerTopicFooterButtons(api, tagName) {
     classNames: ["needs-love", "disabled"],
     dependentKeys: ["topic.tags"],
     displayed() {
-      return disableNeedsLoveButton(this.topic, tagName);
+      return (
+        this.get("currentUser.can_needs_love") &&
+        disableNeedsLoveButton(this.topic, tagName)
+      );
     },
   });
 }
