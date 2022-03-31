@@ -23,7 +23,6 @@ describe CurrentUserSerializer do
       SiteSetting.needs_love_allowed_groups = "#{group.id}"
       json = CurrentUserSerializer.new(user, scope: Guardian.new(user), root: false).as_json
 
-      expect(user.can_needs_love?).to eq(false)
       expect(json[:can_needs_love]).to eq(false)
     end
 
@@ -32,14 +31,12 @@ describe CurrentUserSerializer do
       group.add(user)
       json = CurrentUserSerializer.new(user, scope: Guardian.new(user), root: false).as_json
 
-      expect(User.find(user.id).can_needs_love?).to eq(true)
       expect(json[:can_needs_love]).to eq(true)
     end
 
     it 'returns true for admins' do
       json = CurrentUserSerializer.new(admin, scope: Guardian.new(admin), root: false).as_json
 
-      expect(admin.can_needs_love?).to eq(true)
       expect(json[:can_needs_love]).to eq(true)
     end
 
