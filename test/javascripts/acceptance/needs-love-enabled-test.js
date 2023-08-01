@@ -13,16 +13,18 @@ acceptance(
     needs.user();
     needs.mobileView();
     needs.settings({ needs_love_enabled: true });
-    needs.hooks.beforeEach(() => clearTopicFooterButtons());
+    needs.hooks.beforeEach(function () {
+      clearTopicFooterButtons();
+    });
 
-    test("Footer dropdown does contain button", async (assert) => {
+    test("Footer dropdown does contain button", async function (assert) {
       updateCurrentUser({ can_needs_love: true });
       const menu = selectKit(".topic-footer-mobile-dropdown");
 
       await visit("/t/internationalization-localization/280");
       await menu.expand();
 
-      assert.ok(menu.rowByValue("needs-love").exists());
+      assert.true(menu.rowByValue("needs-love").exists());
     });
   }
 );

@@ -11,15 +11,17 @@ module DiscourseNeedsLove
 
       topic = Topic.find_by(id: params[:topic_id])
       tag = Tag.find_by(name: tag_name)
-      unless tag
-        tag = Tag.create(name: tag_name)
-      end
+      tag = Tag.create(name: tag_name) unless tag
 
       old_tag_names = topic.tags.pluck(:name) || []
       tag_names = ([tag_name] + old_tag_names).uniq
       tags = Tag.where(name: tag_names)
 
-      PostRevisor.new(topic.first_post, topic).revise!(current_user, { tags: tag_names }, validate_post: false)
+      PostRevisor.new(topic.first_post, topic).revise!(
+        current_user,
+        { tags: tag_names },
+        validate_post: false,
+      )
 
       render json: success_json
     end

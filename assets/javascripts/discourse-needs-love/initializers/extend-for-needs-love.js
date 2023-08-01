@@ -18,27 +18,34 @@ function disableNeedsLoveButton(topic, tagName) {
 function registerTopicFooterButtons(api, tagName) {
   api.registerTopicFooterButton({
     id: "needs-love",
+    priority: 250,
+    classNames: ["needs-love"],
+    dependentKeys: ["topic.tags"],
+
     icon() {
       return "band-aid";
     },
-    priority: 250,
+
     translatedTitle() {
       return "Needs Love";
     },
+
     translatedAriaLabel() {
       return "Needs Love";
     },
+
     translatedLabel() {
       return "Needs Love";
     },
+
     action() {
       tagTopic(this.currentUser, this.topic);
     },
+
     dropdown() {
       return this.site.mobileView;
     },
-    classNames: ["needs-love"],
-    dependentKeys: ["topic.tags"],
+
     displayed() {
       return (
         this.get("currentUser.can_needs_love") &&
@@ -49,27 +56,34 @@ function registerTopicFooterButtons(api, tagName) {
 
   api.registerTopicFooterButton({
     id: "needs-love-disabled",
+    priority: 250,
+    classNames: ["needs-love", "disabled"],
+    dependentKeys: ["topic.tags"],
+
     icon() {
       return "band-aid";
     },
-    priority: 250,
+
     translatedTitle() {
       return "Needs Love";
     },
+
     translatedAriaLabel() {
       return "Needs Love";
     },
+
     translatedLabel() {
       return "Needs Love";
     },
+
     action() {
       // No action. Button is disabled.
     },
+
     dropdown() {
       return this.site.mobileView;
     },
-    classNames: ["needs-love", "disabled"],
-    dependentKeys: ["topic.tags"],
+
     displayed() {
       return (
         this.get("currentUser.can_needs_love") &&
