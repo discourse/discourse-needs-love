@@ -1,6 +1,6 @@
-import { withPluginApi } from "discourse/lib/plugin-api";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
+import { withPluginApi } from "discourse/lib/plugin-api";
 
 function tagTopic(user, target) {
   ajax(`/needs_love/needs_love/${target.id}`, {
@@ -97,7 +97,7 @@ export default {
   name: "extend-for-needs-love",
 
   initialize(container) {
-    const siteSettings = container.lookup("site-settings:main");
+    const siteSettings = container.lookup("service:site-settings");
     if (!siteSettings.needs_love_enabled) {
       return;
     }

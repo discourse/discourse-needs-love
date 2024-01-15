@@ -19,17 +19,10 @@ after_initialize do
   require_relative "app/controllers/discourse_needs_love/needs_love_controller.rb"
 
   add_to_class(:user, :can_needs_love?) do
-    @can_needs_love ||=
-      begin
-        if admin?
-          :true
-        else
-          allowed_groups = SiteSetting.needs_love_allowed_groups.split("|").compact
-          allowed_groups.present? && groups.exists?(id: allowed_groups) ? :true : :false
-        end
-      end
+    return @can_needs_love if defined?(@can_needs_love)
 
-    @can_needs_love == :true
+    allowed_groups = SiteSetting.needs_love_allowed_groups.split("|").compact
+    @can_needs_love = admin? || (allowed_groups.present? && groups.exists?(id: allowed_groups))
   end
 
   add_to_serializer(:current_user, :can_needs_love) { object.can_needs_love? }
