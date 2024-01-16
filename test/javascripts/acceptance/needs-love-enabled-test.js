@@ -1,11 +1,11 @@
-import selectKit from "discourse/tests/helpers/select-kit-helper";
+import { visit } from "@ember/test-helpers";
+import { test } from "qunit";
+import { clearTopicFooterButtons } from "discourse/lib/register-topic-footer-button";
 import {
   acceptance,
   updateCurrentUser,
 } from "discourse/tests/helpers/qunit-helpers";
-import { visit } from "@ember/test-helpers";
-import { clearTopicFooterButtons } from "discourse/lib/register-topic-footer-button";
-import { test } from "qunit";
+import selectKit from "discourse/tests/helpers/select-kit-helper";
 
 acceptance(
   "Discourse Needs Love | Needs Love enabled mobile",
