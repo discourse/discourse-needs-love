@@ -9,7 +9,7 @@ module DiscourseNeedsLove
     fab!(:post) { Fabricate(:post, topic: topic) }
 
     context "when signed in as an admin" do
-      fab!(:signed_in_admin) { Fabricate(:admin) }
+      fab!(:signed_in_admin) { Fabricate(:admin, refresh_auto_groups: true) }
 
       before do
         SiteSetting.needs_love_enabled = true
