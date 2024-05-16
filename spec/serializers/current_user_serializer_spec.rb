@@ -4,9 +4,9 @@ require "rails_helper"
 
 describe CurrentUserSerializer do
   describe "can_needs_love?" do
-    fab!(:group) { Fabricate(:group) }
-    fab!(:admin) { Fabricate(:admin) }
-    fab!(:user) { Fabricate(:user) }
+    fab!(:group)
+    fab!(:admin)
+    fab!(:user)
 
     before { SiteSetting.needs_love_enabled = true }
 
