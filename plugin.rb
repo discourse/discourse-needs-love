@@ -9,7 +9,7 @@
 
 enabled_site_setting :needs_love_enabled
 
-register_svg_icon "band-aid" if respond_to?(:register_svg_icon)
+register_svg_icon "bandage" if respond_to?(:register_svg_icon)
 
 require_relative "lib/discourse_needs_love/engine"
 
