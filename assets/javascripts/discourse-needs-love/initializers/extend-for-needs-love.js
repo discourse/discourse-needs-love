@@ -23,7 +23,7 @@ function registerTopicFooterButtons(api, tagName) {
     dependentKeys: ["topic.tags"],
 
     icon() {
-      return "band-aid";
+      return "bandage";
     },
 
     translatedTitle() {
@@ -61,7 +61,7 @@ function registerTopicFooterButtons(api, tagName) {
     dependentKeys: ["topic.tags"],
 
     icon() {
-      return "band-aid";
+      return "bandage";
     },
 
     translatedTitle() {
