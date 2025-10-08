@@ -103,6 +103,6 @@ export default {
     }
     const tagName = siteSettings.needs_love_tag;
 
-    withPluginApi("0.8.28", (api) => registerTopicFooterButtons(api, tagName));
+    withPluginApi((api) => registerTopicFooterButtons(api, tagName));
   },
 };
