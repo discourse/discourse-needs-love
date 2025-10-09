@@ -27,7 +27,7 @@ module DiscourseNeedsLove
     end
 
     context "when signed in as a user" do
-      fab!(:signed_in_user) { Fabricate(:user) }
+      fab!(:signed_in_user, :user)
 
       before do
         SiteSetting.needs_love_enabled = true
