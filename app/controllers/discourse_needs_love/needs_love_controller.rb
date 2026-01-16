@@ -20,7 +20,7 @@ module DiscourseNeedsLove
       tags = Tag.where(name: tag_names)
 
       PostRevisor.new(topic.first_post, topic).revise!(
-        current_user,
+        Discourse.system_user,
         { tags: tag_names },
         validate_post: false,
       )
