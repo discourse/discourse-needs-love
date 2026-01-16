@@ -48,6 +48,7 @@ module DiscourseNeedsLove
         put "/needs_love/needs_love/#{post.topic.id}.json"
 
         expect(response.status).to eq(200)
+        expect(topic.tags.exists?(name: "needs-love")).to eq(true)
       end
     end
   end
