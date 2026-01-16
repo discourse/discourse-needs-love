@@ -12,7 +12,12 @@ function tagTopic(user, target) {
 
 function disableNeedsLoveButton(topic, tagName) {
   const tags = topic.tags || [];
-  return tags.includes(tagName);
+  return tags.some((tag) => {
+    // TODO(https://github.com/discourse/discourse/pull/36678): The string check can be
+    // removed using .discourse-compatibility once the PR is merged.
+    const name = typeof tag === "string" ? tag : tag.name;
+    return name === tagName;
+  });
 }
 
 function registerTopicFooterButtons(api, tagName) {
