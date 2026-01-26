@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe "Needs Love button", type: :system do
+RSpec.describe "Needs Love button" do
   fab!(:user)
   fab!(:group)
   fab!(:topic)
