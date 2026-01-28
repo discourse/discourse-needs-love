@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "rails_helper"
-
 describe CurrentUserSerializer do
   describe "can_needs_love?" do
     fab!(:group)
