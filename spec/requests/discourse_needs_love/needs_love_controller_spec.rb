@@ -48,6 +48,20 @@ module DiscourseNeedsLove
         expect(response.status).to eq(200)
         expect(topic.tags.exists?(name: "needs-love")).to eq(true)
       end
+
+      it "blocks tagging topics the user cannot see" do
+        group.add(signed_in_user)
+        private_group = Fabricate(:group)
+        private_category = Fabricate(:private_category, group: private_group)
+        private_topic = Fabricate(:topic, category: private_category)
+        Fabricate(:post, topic: private_topic)
+
+        put "/needs_love/needs_love/#{private_topic.id}.json"
+
+        expect(response.status).to eq(403)
+        expect(response.parsed_body["errors"]).to be_present
+        expect(private_topic.reload.tags.exists?(name: "needs-love")).to eq(false)
+      end
     end
   end
 end
